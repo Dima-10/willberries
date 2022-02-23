@@ -1,6 +1,6 @@
 # https://mindr17.github.io/Willberries
 
-### Добавлен вебпак
+### Ипользуется typescript в нестрогом режиме
 
 ## Dev:
 
