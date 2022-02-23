@@ -1,4 +1,4 @@
-# https://mindr17.github.io/Willberries
+# https://mindr17.github.io/willberries/
 
 ### Ипользуется typescript в нестрогом режиме
 
