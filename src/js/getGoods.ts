@@ -5,6 +5,7 @@ const getGoods = async () => {
     return await fetch('https://willberries-26280-default-rtdb.firebaseio.com/db.json')
       .then((res) => res.json())
       .then((data) => {
+        console.log("data recieved");
         localStorage.setItem('data', JSON.stringify(data));
         return data;
       });
