@@ -24,7 +24,7 @@ module.exports = {
         use: ["style-loader", "css-loader"],
       },
       {
-        test: /\.(woff|woff2|eot|ttf|otf)$/i,
+        test: /\.(woff|woff2|eot|ttf|otf|json)$/i,
         type: "asset/resource",
       },
       {
@@ -47,7 +47,7 @@ module.exports = {
         },
       },
       {
-        test: /\.(jpe?g|png|gif|svg|webp)$/,
+        test: /\.(jpe?g|png|gif|svg|webp|json)$/,
         type: "asset/resource",
       },
     ],

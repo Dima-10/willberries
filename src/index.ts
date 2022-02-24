@@ -7,3 +7,4 @@ import "./css/style.css";
 
 import "./js/cart.ts";
 import "./js/search.ts";
+import "./js/getGoods.ts";
