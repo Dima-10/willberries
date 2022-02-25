@@ -6,7 +6,7 @@
     "start": "webpack serve --devtool source-map --open",
     "dev": "webpack serve --devtool source-map",
     "build": "webpack --mode=production",
-    "build-map": "webpack"
+    "build-map": "webpack --devtool source-map"
   },
   "license": "MIT",
   "dependencies": {
