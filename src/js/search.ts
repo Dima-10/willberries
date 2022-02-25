@@ -3,6 +3,10 @@ const search = function() {
   const searchBtn = document.querySelector('.search-block > button');
   
   try {
+    let githubPagesPathFix: String = "";
+    if (window.location.hostname === 'github.io') {
+      githubPagesPathFix = "willberries/";
+    }
 
     const renderGoods = (goods) => {
         const goodsContainer = document.querySelector('.long-goods-list');
@@ -15,7 +19,6 @@ const search = function() {
           goodsBlock.classList.add('col-lg-3');
           goodsBlock.classList.add('col-lg-6');
 
-          
         const friendsImagesLinks = ((ctx) => ctx.keys().map(ctx))(
           require.context("../db/img", true, /.*/)
         );
@@ -35,7 +38,7 @@ const search = function() {
               </div>
               <!-- /.goods-card -->
           `
-
+          
           goodsContainer.append(goodsBlock);
         })
       }
@@ -49,8 +52,8 @@ const search = function() {
 
               localStorage.setItem('goods', JSON.stringify(array));
 
-              if (window.location.pathname !== '/goods.html') {
-                window.location.href = '/goods.html';
+              if (window.location.pathname !== githubPagesPathFix + '/goods.html') {
+                window.location.href = githubPagesPathFix + '/goods.html';
               } else {
                 renderGoods(array);
               }
@@ -64,9 +67,7 @@ const search = function() {
       }
 
     searchBtn.addEventListener('click', () => {
-      getData(input.value, '');
-      
-      
+      getData(input.value, '');      
 
     });
   } catch (e) {

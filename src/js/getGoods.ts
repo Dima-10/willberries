@@ -3,6 +3,11 @@ const imgLinks = ((ctx) => ctx.keys().map(ctx))(
 );
 
 const getGoods = () => {
+  let githubPagesPathFix: String = "";
+  if (window.location.hostname === 'mindr17/github.io') {
+    githubPagesPathFix = "willberries/";
+  }
+
   const links = document.querySelectorAll('.navigation-link');
 
   const renderGoods = (goods) => {
@@ -45,8 +50,8 @@ const getGoods = () => {
 
           localStorage.setItem('goods', JSON.stringify(array));
 
-          if (window.location.pathname !== '/goods.html') {
-            window.location.href = '/goods.html';
+          if (window.location.pathname !== githubPagesPathFix + '/goods.html') {
+            window.location.href = githubPagesPathFix + 'goods.html';
           } else {
             renderGoods(array);
           }
@@ -74,7 +79,7 @@ const getGoods = () => {
   }
 
   // View All
-  if (window.location.pathname !== '/goods.html') {
+  if (window.location.pathname !== githubPagesPathFix + '/goods.html') {
     const viewAllBtn = document.querySelector('.more');
     viewAllBtn.addEventListener('click', (e) => {
       e.preventDefault();
