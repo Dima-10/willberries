@@ -74,10 +74,13 @@ const getGoods = () => {
   }
 
   // View All
-  const viewAllBtn = document.querySelector('.more');
-  viewAllBtn.addEventListener('click', (e) => {
-    e.preventDefault();
-    getData('', '');
-  });
+  if (window.location.pathname !== '/goods.html') {
+    const viewAllBtn = document.querySelector('.more');
+    viewAllBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      getData('', '');
+      renderGoods(JSON.parse(localStorage.getItem('goods')));
+    });
+  }
 }
 getGoods();
