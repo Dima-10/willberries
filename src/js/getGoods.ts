@@ -1,24 +1,18 @@
+import { getPath, setHref } from "./url";
+
 const imgLinks = ((ctx) => ctx.keys().map(ctx))(
   require.context("../db/img", true, /.*/)
-);
-
-const getGoods = () => {
-  let githubPagesPathFix = "";
-  let githubPagesHrefFix = "";
-  if (window.location.hostname === 'mindr17/github.io') {
-    githubPagesPathFix = "willberries";
-    githubPagesHrefFix = "willberries/";
-  } else {
-    console.log(`window.location.pathname == ${window.location.pathname}`)
-    console.log(`window.location.href == ${window.location.href}`)
-  }
-
-  const links = document.querySelectorAll('.navigation-link');
-
-  const renderGoods = (goods) => {
-    const goodsContainer = document.querySelector('.long-goods-list');
-
-    goodsContainer.innerHTML = ""
+  );
+  
+  const getGoods = () => {
+    
+    
+    const links = document.querySelectorAll('.navigation-link');
+    
+    const renderGoods = (goods) => {
+      const goodsContainer = document.querySelector('.long-goods-list');
+      
+    goodsContainer.innerHTML = "";
 
     goods.forEach(good => {
       const goodsBlock = document.createElement('div');
@@ -52,15 +46,15 @@ const getGoods = () => {
         .then((res) => res.json())
         .then((data) => {
           const array = category ? data.filter((item) => item[category] === value) : data;
-
+          
           localStorage.setItem('goods', JSON.stringify(array));
-
-          if (window.location.pathname !== githubPagesPathFix + '/goods.html') {
-            window.location.href = githubPagesHrefFix + 'goods.html';
+          
+          if (window.location.pathname !== getPath()) {
+            setHref('/goods.html');
           } else {
             renderGoods(array);
           }
-
+          
           return resolve(array);
         })
         .catch(() => {
@@ -72,6 +66,7 @@ const getGoods = () => {
   links.forEach((link: HTMLElement) => {
     link.addEventListener('click', async (event) => {
       event.preventDefault();
+      console.log('1');
       const linkValue = link.textContent;
       const category = link.dataset.field;
 
@@ -79,12 +74,12 @@ const getGoods = () => {
     })
   });
   
-  if (localStorage.getItem('goods') && window.location.pathname === githubPagesPathFix + '/goods.html') {
+  if (localStorage.getItem('goods') && window.location.pathname === getPath()) {
     renderGoods(JSON.parse(localStorage.getItem('goods')))
   }
 
   // View All
-  if (window.location.pathname !== githubPagesPathFix + '/goods.html') {
+  if (window.location.pathname !== getPath()) {
     const viewAllBtn = document.querySelector('.more');
     viewAllBtn.addEventListener('click', (e) => {
       e.preventDefault();

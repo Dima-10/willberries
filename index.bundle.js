@@ -948,20 +948,14 @@ cart();
 /*!****************************!*\
   !*** ./src/js/getGoods.ts ***!
   \****************************/
-/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const url_1 = __webpack_require__(/*! ./url */ "./src/js/url.ts");
 const imgLinks = ((ctx) => ctx.keys().map(ctx))(__webpack_require__("./src/db/img sync recursive .*"));
 const getGoods = () => {
-    let githubPagesPathFix = "";
-    let githubPagesHrefFix = "";
-    if (window.location.hostname === 'mindr17/github.io') {
-        githubPagesPathFix = "willberries";
-        githubPagesHrefFix = "willberries/";
-    }
-    else {
-        console.log(`window.location.pathname == ${window.location.pathname}`);
-        console.log(`window.location.href == ${window.location.href}`);
-    }
     const links = document.querySelectorAll('.navigation-link');
     const renderGoods = (goods) => {
         const goodsContainer = document.querySelector('.long-goods-list');
@@ -995,8 +989,8 @@ const getGoods = () => {
                 .then((data) => {
                 const array = category ? data.filter((item) => item[category] === value) : data;
                 localStorage.setItem('goods', JSON.stringify(array));
-                if (window.location.pathname !== githubPagesPathFix + '/goods.html') {
-                    window.location.href = githubPagesHrefFix + 'goods.html';
+                if (window.location.pathname !== (0, url_1.getPath)()) {
+                    (0, url_1.setHref)('/goods.html');
                 }
                 else {
                     renderGoods(array);
@@ -1011,16 +1005,17 @@ const getGoods = () => {
     links.forEach((link) => {
         link.addEventListener('click', async (event) => {
             event.preventDefault();
+            console.log('1');
             const linkValue = link.textContent;
             const category = link.dataset.field;
             getData(linkValue, category);
         });
     });
-    if (localStorage.getItem('goods') && window.location.pathname === githubPagesPathFix + '/goods.html') {
+    if (localStorage.getItem('goods') && window.location.pathname === (0, url_1.getPath)()) {
         renderGoods(JSON.parse(localStorage.getItem('goods')));
     }
     // View All
-    if (window.location.pathname !== githubPagesPathFix + '/goods.html') {
+    if (window.location.pathname !== (0, url_1.getPath)()) {
         const viewAllBtn = document.querySelector('.more');
         viewAllBtn.addEventListener('click', (e) => {
             e.preventDefault();
@@ -1038,22 +1033,16 @@ getGoods();
 /*!**************************!*\
   !*** ./src/js/search.ts ***!
   \**************************/
-/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const url_1 = __webpack_require__(/*! ./url */ "./src/js/url.ts");
 const search = function () {
     const input = document.querySelector('.search-block > input');
     const searchBtn = document.querySelector('.search-block > button');
     try {
-        let githubPagesPathFix = "";
-        let githubPagesHrefFix = "";
-        if (window.location.hostname === 'mindr17/github.io') {
-            githubPagesPathFix = "willberries";
-            githubPagesHrefFix = "willberries/";
-        }
-        else {
-            console.log(`window.location.pathname == ${window.location.pathname}`);
-            console.log(`window.location.href == ${window.location.href}`);
-        }
         const renderGoods = (goods) => {
             const goodsContainer = document.querySelector('.long-goods-list');
             goodsContainer.innerHTML = "";
@@ -1061,7 +1050,7 @@ const search = function () {
                 const goodsBlock = document.createElement('div');
                 goodsBlock.classList.add('col-lg-3');
                 goodsBlock.classList.add('col-lg-6');
-                const friendsImagesLinks = ((ctx) => ctx.keys().map(ctx))(__webpack_require__("./src/db/img sync recursive .*"));
+                const imgLinks = ((ctx) => ctx.keys().map(ctx))(__webpack_require__("./src/db/img sync recursive .*"));
                 goodsBlock.innerHTML = `
               <div class="goods-card">
                 <span class="label ${good.label ? null : 'd-none'}">${good.label}</span>
@@ -1087,8 +1076,8 @@ const search = function () {
                     .then((data) => {
                     const array = data.filter(good => good.name.toLowerCase().includes(value.toLowerCase()));
                     localStorage.setItem('goods', JSON.stringify(array));
-                    if (window.location.pathname !== githubPagesPathFix + '/goods.html') {
-                        window.location.href = githubPagesHrefFix + '/goods.html';
+                    if (window.location.pathname !== (0, url_1.getPath)()) {
+                        (0, url_1.setHref)('/goods.html');
                     }
                     else {
                         renderGoods(array);
@@ -1109,6 +1098,46 @@ const search = function () {
     }
 };
 search();
+
+
+/***/ }),
+
+/***/ "./src/js/url.ts":
+/*!***********************!*\
+  !*** ./src/js/url.ts ***!
+  \***********************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.updateUrl = exports.setHref = exports.getPath = void 0;
+const hostingUrl = 'github.io';
+const getPath = () => {
+    let path = "";
+    if (window.location.hostname.includes(hostingUrl)) {
+        path = "/willberries/goods.html";
+    }
+    else {
+        path = "/goods.html";
+    }
+    return path;
+};
+exports.getPath = getPath;
+const setHref = (hrefToSet) => {
+    let newHref = "";
+    if (window.location.hostname.includes(hostingUrl)) {
+        newHref = "willberries/" + hrefToSet;
+    }
+    else {
+        newHref = hrefToSet;
+    }
+    window.location.href = newHref;
+};
+exports.setHref = setHref;
+const updateUrl = () => {
+};
+exports.updateUrl = updateUrl;
 
 
 /***/ }),
@@ -1897,8 +1926,8 @@ __webpack_require__(/*! ./css/bootstrap-grid.min.css */ "./src/css/bootstrap-gri
 __webpack_require__(/*! ./css/swiper-bundle.min.css */ "./src/css/swiper-bundle.min.css");
 __webpack_require__(/*! ./css/style.css */ "./src/css/style.css");
 __webpack_require__(/*! ./js/cart.ts */ "./src/js/cart.ts");
-__webpack_require__(/*! ./js/search.ts */ "./src/js/search.ts");
 __webpack_require__(/*! ./js/getGoods.ts */ "./src/js/getGoods.ts");
+__webpack_require__(/*! ./js/search.ts */ "./src/js/search.ts");
 
 })();
 

@@ -1,18 +1,10 @@
+import { getPath, setHref } from "./url";
+
 const search = function() {
   const input = document.querySelector('.search-block > input') as HTMLTextAreaElement;
   const searchBtn = document.querySelector('.search-block > button');
   
   try {
-    let githubPagesPathFix = "";
-    let githubPagesHrefFix = "";
-    if (window.location.hostname === 'mindr17/github.io') {
-      githubPagesPathFix = "willberries";
-      githubPagesHrefFix = "willberries/";
-    } else {
-      console.log(`window.location.pathname == ${window.location.pathname}`)
-      console.log(`window.location.href == ${window.location.href}`)
-    }
-
     const renderGoods = (goods) => {
         const goodsContainer = document.querySelector('.long-goods-list');
 
@@ -24,9 +16,9 @@ const search = function() {
           goodsBlock.classList.add('col-lg-3');
           goodsBlock.classList.add('col-lg-6');
 
-        const friendsImagesLinks = ((ctx) => ctx.keys().map(ctx))(
-          require.context("../db/img", true, /.*/)
-        );
+          const imgLinks = ((ctx) => ctx.keys().map(ctx))(
+            require.context("../db/img", true, /.*/)
+          );
 
           goodsBlock.innerHTML = `
               <div class="goods-card">
@@ -57,8 +49,8 @@ const search = function() {
 
               localStorage.setItem('goods', JSON.stringify(array));
 
-              if (window.location.pathname !== githubPagesPathFix + '/goods.html') {
-                window.location.href = githubPagesHrefFix + '/goods.html';
+              if (window.location.pathname !== getPath()) {
+                setHref('/goods.html');
               } else {
                 renderGoods(array);
               }
