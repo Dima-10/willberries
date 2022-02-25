@@ -3,7 +3,7 @@ const imgLinks = ((ctx) => ctx.keys().map(ctx))(
 );
 
 const getGoods = () => {
-  let githubPagesPathFix: String = "";
+  let githubPagesPathFix = "";
   if (window.location.hostname === 'mindr17/github.io') {
     githubPagesPathFix = "willberries/";
   }
@@ -74,7 +74,7 @@ const getGoods = () => {
     })
   });
   
-  if (localStorage.getItem('goods') && window.location.pathname === '/goods.html') {
+  if (localStorage.getItem('goods') && window.location.pathname === githubPagesPathFix + '/goods.html') {
     renderGoods(JSON.parse(localStorage.getItem('goods')))
   }
 
