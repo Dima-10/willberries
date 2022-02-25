@@ -953,8 +953,14 @@ cart();
 const imgLinks = ((ctx) => ctx.keys().map(ctx))(__webpack_require__("./src/db/img sync recursive .*"));
 const getGoods = () => {
     let githubPagesPathFix = "";
+    let githubPagesHrefFix = "";
     if (window.location.hostname === 'mindr17/github.io') {
-        githubPagesPathFix = "willberries/";
+        githubPagesPathFix = "willberries";
+        githubPagesHrefFix = "willberries/";
+    }
+    else {
+        console.log(`window.location.pathname == ${window.location.pathname}`);
+        console.log(`window.location.href == ${window.location.href}`);
     }
     const links = document.querySelectorAll('.navigation-link');
     const renderGoods = (goods) => {
@@ -990,7 +996,7 @@ const getGoods = () => {
                 const array = category ? data.filter((item) => item[category] === value) : data;
                 localStorage.setItem('goods', JSON.stringify(array));
                 if (window.location.pathname !== githubPagesPathFix + '/goods.html') {
-                    window.location.href = githubPagesPathFix + 'goods.html';
+                    window.location.href = githubPagesHrefFix + 'goods.html';
                 }
                 else {
                     renderGoods(array);
@@ -1039,8 +1045,14 @@ const search = function () {
     const searchBtn = document.querySelector('.search-block > button');
     try {
         let githubPagesPathFix = "";
-        if (window.location.hostname === 'github.io') {
-            githubPagesPathFix = "willberries/";
+        let githubPagesHrefFix = "";
+        if (window.location.hostname === 'mindr17/github.io') {
+            githubPagesPathFix = "willberries";
+            githubPagesHrefFix = "willberries/";
+        }
+        else {
+            console.log(`window.location.pathname == ${window.location.pathname}`);
+            console.log(`window.location.href == ${window.location.href}`);
         }
         const renderGoods = (goods) => {
             const goodsContainer = document.querySelector('.long-goods-list');
@@ -1076,7 +1088,7 @@ const search = function () {
                     const array = data.filter(good => good.name.toLowerCase().includes(value.toLowerCase()));
                     localStorage.setItem('goods', JSON.stringify(array));
                     if (window.location.pathname !== githubPagesPathFix + '/goods.html') {
-                        window.location.href = githubPagesPathFix + '/goods.html';
+                        window.location.href = githubPagesHrefFix + '/goods.html';
                     }
                     else {
                         renderGoods(array);
