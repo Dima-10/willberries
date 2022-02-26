@@ -1126,7 +1126,7 @@ exports.getPath = getPath;
 const setHref = (hrefToSet) => {
     let newHref = "";
     if (window.location.hostname.includes(hostingUrl)) {
-        newHref = "willberries" + hrefToSet;
+        newHref = "/willberries" + hrefToSet;
     }
     else {
         newHref = hrefToSet;
