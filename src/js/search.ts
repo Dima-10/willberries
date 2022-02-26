@@ -64,8 +64,7 @@ const search = function() {
       }
 
     searchBtn.addEventListener('click', () => {
-      getData(input.value, '');      
-
+      getData(input.value, '');
     });
   } catch (e) {
     console.error(e);

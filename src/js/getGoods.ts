@@ -5,8 +5,6 @@ const imgLinks = ((ctx) => ctx.keys().map(ctx))(
   );
   
   const getGoods = () => {
-    
-    
     const links = document.querySelectorAll('.navigation-link');
     
     const renderGoods = (goods) => {
@@ -29,8 +27,8 @@ const imgLinks = ((ctx) => ctx.keys().map(ctx))(
             <p class="goods-description">${good.description}</p>
             <!-- /.goods-description -->
             <!-- /.goods-price -->
-            <button class="button goods-card-btn add-to-cart" data-id="007">
-              <span class="button-price">$89</span>
+            <button class="button goods-card-btn add-to-cart" data-id="${good.id}">
+              <span class="button-price">$${good.price}</span>
             </button>
           </div>
           <!-- /.goods-card -->
@@ -40,7 +38,7 @@ const imgLinks = ((ctx) => ctx.keys().map(ctx))(
     })
   }
   
-  const getData = (value: string, category: string) => {
+  const getData = (value, category) => {
     return new Promise((resolve, reject) => {
       fetch('https://willberries-26280-default-rtdb.firebaseio.com/db.json')
         .then((res) => res.json())
