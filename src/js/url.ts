@@ -1,10 +1,11 @@
 const hostingUrl = 'github.io';
+const reposName = 'willberries';
 
 export const getPath = () => {
   let path: string = "";
 
   if (window.location.hostname.includes(hostingUrl)) {
-    path = "/willberries/goods.html";
+    path = "/" + reposName + "/goods.html";
   } else {
     path = "/goods.html";
   }
@@ -15,7 +16,7 @@ export const setHref = (hrefToSet: string) => {
   
   let newHref: string = "";
   if (window.location.hostname.includes(hostingUrl)) {
-    newHref = "/willberries" + hrefToSet;
+    newHref = "/" + reposName + hrefToSet;
   } else {
     newHref = hrefToSet;
   }

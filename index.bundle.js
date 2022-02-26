@@ -1112,10 +1112,11 @@ search();
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.updateUrl = exports.setHref = exports.getPath = void 0;
 const hostingUrl = 'github.io';
+const reposName = 'willberries';
 const getPath = () => {
     let path = "";
     if (window.location.hostname.includes(hostingUrl)) {
-        path = "/willberries/goods.html";
+        path = "/" + reposName + "/goods.html";
     }
     else {
         path = "/goods.html";
@@ -1126,7 +1127,7 @@ exports.getPath = getPath;
 const setHref = (hrefToSet) => {
     let newHref = "";
     if (window.location.hostname.includes(hostingUrl)) {
-        newHref = "/willberries" + hrefToSet;
+        newHref = "/" + reposName + hrefToSet;
     }
     else {
         newHref = hrefToSet;
