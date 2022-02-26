@@ -15,7 +15,6 @@ const cart = function() {
     cart.forEach((item) => {
       sum += Number(item.price) * Number(item.count);
     });
-    console.log(sum);
     const sumText: string = String(sum);
     sumElement.textContent = sumText;
   }
