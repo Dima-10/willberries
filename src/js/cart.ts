@@ -64,14 +64,12 @@ const cart = function() {
     const cart = localStorage.getItem('cart') ?
       JSON.parse(localStorage.getItem('cart')) : [];
     if (cart.some((good: any) => good.id === clickedGood.id)) {
-      console.log('Увеличить количество clickedGood');
       cart.map(good => {
         if (good.id === clickedGood.id) {
           good.count++;
         }
       })
     } else {
-      console.log('Добавить в корзину');
       clickedGood.count = 1;
       cart.push(clickedGood);
     }
