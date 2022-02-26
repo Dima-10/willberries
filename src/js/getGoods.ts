@@ -38,7 +38,7 @@ const imgLinks = ((ctx) => ctx.keys().map(ctx))(
     })
   }
   
-  const getData = (value, category) => {
+  const getData = (value?: string, category?: string): Promise<object> => {
     return new Promise((resolve, reject) => {
       fetch('https://willberries-26280-default-rtdb.firebaseio.com/db.json')
         .then((res) => res.json())

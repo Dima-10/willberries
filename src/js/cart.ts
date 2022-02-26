@@ -7,30 +7,34 @@ const cart = function() {
   const modalForm = document.querySelector('.modal-form');
   const sumElement = cart.querySelector('.card-table__total');
 
-  const updateSum = () => {
-    const cart = localStorage.getItem('cart') ?
-      JSON.parse(localStorage.getItem('cart')) : [];
-
-    let sum: number = 0;
-    cart.forEach((item) => {
-      sum += Number(item.price) * Number(item.count);
-    });
-    const sumText: string = String(sum);
-    sumElement.textContent = sumText;
+  const getFromStorage = (name: string): Array<any> => {
+    return localStorage.getItem(name) ?
+      JSON.parse(localStorage.getItem(name)) : [];
   }
 
-  const deteleCartItem = (id) => {
+  const updateSum = (): void => {
+    const cart: Array<any> = getFromStorage('cart');
+
+    let sum: number = 0;
+    cart.forEach((item: any) => {
+      sum += Number(item.price) * Number(item.count);
+    });
+    
+    sumElement.textContent = String(sum);
+  }
+
+  const deteleCartItem = (id): void => {
     const cart = JSON.parse(localStorage.getItem('cart'));
 
     const newCart = cart.filter(good => {
-      return good.id !== id
+      return good.id !== id;
     });
 
     localStorage.setItem('cart', JSON.stringify(newCart));
     renderCartGoods(JSON.parse(localStorage.getItem('cart')));
   }
 
-  const plusCartItem = (id) => {
+  const plusCartItem = (id): void => {
     const cart = JSON.parse(localStorage.getItem('cart'))
 
     const newCart = cart.map(good => {
@@ -44,7 +48,7 @@ const cart = function() {
     renderCartGoods(JSON.parse(localStorage.getItem('cart')));
   }
   
-  const minusCartItem = (id) => {
+  const minusCartItem = (id): void => {
     const cart = JSON.parse(localStorage.getItem('cart'))
   
     const newCart = cart.map(good => {
@@ -59,7 +63,7 @@ const cart = function() {
   }
 
   const addToCart = (id) => {
-    const goods = JSON.parse(localStorage.getItem('goods'));
+    const goods = getFromStorage('goods');
     const clickedGood = goods.find((good: any) => good.id === id);
     const cart = localStorage.getItem('cart') ?
       JSON.parse(localStorage.getItem('cart')) : [];
