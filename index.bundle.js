@@ -1005,7 +1005,6 @@ const getGoods = () => {
     links.forEach((link) => {
         link.addEventListener('click', async (event) => {
             event.preventDefault();
-            console.log('1');
             const linkValue = link.textContent;
             const category = link.dataset.field;
             getData(linkValue, category);
@@ -1127,7 +1126,8 @@ exports.getPath = getPath;
 const setHref = (hrefToSet) => {
     let newHref = "";
     if (window.location.hostname.includes(hostingUrl)) {
-        newHref = "willberries/" + hrefToSet;
+        // newHref = "willberries" + hrefToSet;
+        newHref = hrefToSet;
     }
     else {
         newHref = hrefToSet;

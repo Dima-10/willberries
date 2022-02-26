@@ -66,7 +66,6 @@ const imgLinks = ((ctx) => ctx.keys().map(ctx))(
   links.forEach((link: HTMLElement) => {
     link.addEventListener('click', async (event) => {
       event.preventDefault();
-      console.log('1');
       const linkValue = link.textContent;
       const category = link.dataset.field;
 
