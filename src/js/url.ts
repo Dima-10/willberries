@@ -15,8 +15,7 @@ export const setHref = (hrefToSet: string) => {
   
   let newHref: string = "";
   if (window.location.hostname.includes(hostingUrl)) {
-    // newHref = "willberries" + hrefToSet;
-    newHref = hrefToSet;
+    newHref = "willberries" + hrefToSet;
   } else {
     newHref = hrefToSet;
   }
